@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Study</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .study-header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .study-header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background: #ecf0f1;
+            border-radius: 10px;
+            height: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .screen {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .study-image {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .map-container {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+
+        .confidence-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .confidence-slider-container {
+            margin: 15px 0;
+        }
+
+        .confidence-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+            margin: 10px 0;
+        }
+
+        .confidence-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .confidence-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .confidence-display {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+
+        .confidence-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .ai-predictions {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .ai-teammate {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .teammate-info {
+            flex: 1;
+        }
+
+        .teammate-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .teammate-location {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .ai-confidence-bar {
+            width: 100px;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-left: 15px;
+        }
+
+        .ai-confidence-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .revision-section {
+            background: #fff3cd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+
+        .questionnaire {
+            margin: 20px 0;
+        }
+
+        .question {
+            margin: 20px 0;
+        }
+
+        .question label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 500px;
+            margin: 10px 0;
+        }
+
+        .scale input[type="radio"] {
+            margin: 0 10px;
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            max-width: 500px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .consent-item {
+            margin: 15px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .consent-item input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+
+        .instructions {
+            background: #e8f4fd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .button-group {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .status-complete {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="study-header">
+            <h1>Human-AI Team Geolocation Study</h1>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <p>Trial <span id="currentTrial">0</span> of <span id="totalTrials">10</span></p>
+        </div>
+
+        <!-- Consent Screen -->
+        <div class="screen active" id="consentScreen">
+            <h2>Participant Consent</h2>
+            <div class="instructions">
+                <h3>Study Information</h3>
+                <p>You will participate in a geolocation task where you'll guess where indoor photographs were taken. You'll work with AI teammates who will provide their predictions and confidence levels. The study takes approximately 20-30 minutes.</p>
+            </div>
+            
+            <div class="consent-item">
+                <input type="checkbox" id="consent1" required>
+                <label for="consent1">I confirm that I have read and understood the Participant Information Sheet.</label>
+            </div>
+            
+            <div class="consent-item">
+                <input type="checkbox" id="consent2" required>
+                <label for="consent2">I understand that my participation is voluntary and that I am free to withdraw at any time without giving any reason.</label>
+            </div>
+            
+            <div class="consent-item">
+                <input type="checkbox" id="consent3" required>
+                <label for="consent3">I confirm that I agree to the way my data will be collected and processed and that data will be stored for up to 10 years.</label>
+            </div>
+            
+            <div class="consent-item">
+                <input type="checkbox" id="consent4" required>
+                <label for="consent4">I understand that all data and information I provide will be kept confidential.</label>
+            </div>
+            
+            <div class="consent-item">
+                <input type="checkbox" id="consent5" required>
+                <label for="consent5">I agree to take part in the study.</label>
+            </div>
+            
+            <div class="error" id="consentError" style="display: none;">Please check all consent boxes to continue.</div>
+            
+            <div class="button-group">
+                <button class="btn" onclick="startStudy()">Begin Study</button>
+            </div>
+        </div>
+
+        <!-- Demographics Screen -->
+        <div class="screen" id="demographicsScreen">
+            <h2>Background Information</h2>
+            <div class="questionnaire">
+                <div class="question">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" min="18" max="100" required>
+                </div>
+                
+                <div class="question">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" required>
+                        <option value="">Please select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="non-binary">Non-binary</option>
+                        <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="error" id="demographicsError" style="display: none;">Please complete all fields.</div>
+            
+            <div class="button-group">
+                <button class="btn" onclick="startTrials()">Continue</button>
+            </div>
+        </div>
+
+        <!-- Main Trial Screen -->
+        <div class="screen" id="trialScreen">
+            <h2>Location Guessing Task</h2>
+            
+            <div class="instructions">
+                <p><strong>Instructions:</strong> Look at the image below and guess where this photo was taken by clicking on the map. Then rate your confidence in your guess using the slider.</p>
+            </div>
+            
+            <div class="image-container">
+                <img id="currentImage" class="study-image" src="" alt="Location to guess">
+            </div>
+            
+            <div class="map-container" id="mapContainer"></div>
+            
+            <!-- Initial Confidence Section -->
+            <div class="confidence-section" id="initialConfidenceSection">
+                <h3>Your Confidence 
+                    <span class="status-indicator status-pending" id="locationStatus">Select location first</span>
+                </h3>
+                <p>How confident are you in your location guess?</p>
+                <div class="confidence-slider-container">
+                    <input type="range" id="initialConfidenceSlider" class="confidence-slider" 
+                           min="0" max="100" value="50" disabled>
+                    <div class="confidence-display" id="initialConfidenceDisplay">50%</div>
+                    <div class="confidence-labels">
+                        <span>Not confident at all</span>
+                        <span>Extremely confident</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Predictions Section -->
+            <div id="aiPredictions" class="ai-predictions" style="display: none;">
+                <h3>AI Teammate Predictions</h3>
+                <div id="aiTeammates"></div>
+            </div>
+
+            <!-- Revision Section -->
+            <div id="revisionSection" class="revision-section" style="display: none;">
+                <h3>Revise Your Answer (Optional)</h3>
+                <p>After seeing the AI predictions, you can:</p>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>Click on the map again to change your location guess</li>
+                    <li>Adjust your confidence using the slider below</li>
+                    <li>Or keep your original answer unchanged</li>
+                </ul>
+                
+                <div class="confidence-slider-container">
+                    <label for="finalConfidenceSlider"><strong>Updated Confidence:</strong></label>
+                    <input type="range" id="finalConfidenceSlider" class="confidence-slider" 
+                           min="0" max="100" value="50">
+                    <div class="confidence-display" id="finalConfidenceDisplay">50%</div>
+                    <div class="confidence-labels">
+                        <span>Not confident at all</span>
+                        <span>Extremely confident</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn" id="initialGuessBtn" onclick="showAIPredictions()" disabled>Confirm Initial Guess</button>
+                <button class="btn" id="finalGuessBtn" onclick="nextTrial()" style="display: none;">Submit Final Answer</button>
+            </div>
+        </div>
+
+        <!-- Post-trial Questionnaires -->
+        <div class="screen" id="questionnaireScreen">
+            <h2>Study Questions</h2>
+            
+            <div class="questionnaire">
+                <div class="question">
+                    <label>How much did you trust the AI teammates' predictions overall?</label>
+                    <div class="scale">
+                        <span>Not at all</span>
+                        <input type="radio" name="trust" value="1" required>
+                        <input type="radio" name="trust" value="2" required>
+                        <input type="radio" name="trust" value="3" required>
+                        <input type="radio" name="trust" value="4" required>
+                        <input type="radio" name="trust" value="5" required>
+                        <input type="radio" name="trust" value="6" required>
+                        <input type="radio" name="trust" value="7" required>
+                        <span>Completely</span>
+                    </div>
+                    <div class="scale-labels">
+                        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>How confident were you in your final decisions overall?</label>
+                    <div class="scale">
+                        <span>Not confident</span>
+                        <input type="radio" name="confidence" value="1" required>
+                        <input type="radio" name="confidence" value="2" required>
+                        <input type="radio" name="confidence" value="3" required>
+                        <input type="radio" name="confidence" value="4" required>
+                        <input type="radio" name="confidence" value="5" required>
+                        <input type="radio" name="confidence" value="6" required>
+                        <input type="radio" name="confidence" value="7" required>
+                        <span>Very confident</span>
+                    </div>
+                    <div class="scale-labels">
+                        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>Please describe your strategy for making location guesses and how the AI predictions influenced your decisions:</label>
+                    <textarea id="strategy" placeholder="Please explain your approach..."></textarea>
+                </div>
+                
+                <div class="question">
+                    <label>Any additional comments about the study:</label>
+                    <textarea id="comments" placeholder="Optional feedback..."></textarea>
+                </div>
+            </div>
+            
+            <div class="error" id="questionnaireError" style="display: none;">Please answer all required questions.</div>
+            
+            <div class="button-group">
+                <button class="btn" onclick="completeStudy()">Complete Study</button>
+            </div>
+        </div>
+
+        <!-- Completion Screen -->
+        <div class="screen" id="completionScreen">
+            <h2>Study Complete!</h2>
+            <div class="instructions">
+                <p>Thank you for participating in our study. Your responses have been recorded.</p>
+                <p><strong>Completion Code:</strong> <span id="completionCode" style="font-family: monospace; background: #f8f9fa; padding: 5px 10px; border-radius: 5px;"></span></p>
+                <p>Please copy this code and paste it into Prolific to receive your payment.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        // CONFIGURATION - UPDATE THESE VALUES FOR YOUR STUDY
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+        
+        // Study images with ground truth locations and AI predictions
+        const studyImages = [
+            {
+                url: 'images/photo1.jpg', // Replace with your image paths
+                groundTruth: { lat: 55.8642, lng: -4.2518 }, // Glasgow, UK
+                description: 'University library',
+                aiPredictions: {
+                    no_labels: [
+                        { id: 'ai1', label: 'AI System 1', lat: 55.8600, lng: -4.2500, confidence: 0.75 },
+                        { id: 'ai2', label: 'AI System 2', lat: 55.8700, lng: -4.2600, confidence: 0.82 },
+                        { id: 'ai3', label: 'AI System 3', lat: 55.8580, lng: -4.2450, confidence: 0.68 }
+                    ],
+                    generic_labels: [
+                        { id: 'manager', label: 'Manager', lat: 55.8650, lng: -4.2530, confidence: 0.78 },
+                        { id: 'algo1', label: 'Algorithm 1', lat: 55.8600, lng: -4.2500, confidence: 0.75 },
+                        { id: 'algo2', label: 'Algorithm 2', lat: 55.8700, lng: -4.2600, confidence: 0.82 }
+                    ],
+                    domain_labels: [
+                        { id: 'manager', label: 'Manager', lat: 55.8650, lng: -4.2530, confidence: 0.78 },
+                        { id: 'ethnicity', label: 'Ethnicity Expert', lat: 55.8620, lng: -4.2480, confidence: 0.85 },
+                        { id: 'geography', label: 'Geography Expert', lat: 55.8680, lng: -4.2550, confidence: 0.88 }
+                    ]
+                }
+            },
+            {
+                url: 'images/photo2.jpg',
+                groundTruth: { lat: 40.7589, lng: -73.9851 }, // New York, US
+                description: 'Office building',
+                aiPredictions: {
+                    no_labels: [
+                        { id: 'ai1', label: 'AI System 1', lat: 40.7500, lng: -73.9800, confidence: 0.72 },
+                        { id: 'ai2', label: 'AI System 2', lat: 40.7600, lng: -73.9900, confidence: 0.79 },
+                        { id: 'ai3', label: 'AI System 3', lat: 40.7550, lng: -73.9850, confidence: 0.65 }
+                    ],
+                    generic_labels: [
+                        { id: 'manager', label: 'Manager', lat: 40.7580, lng: -73.9840, confidence: 0.76 },
+                        { id: 'algo1', label: 'Algorithm 1', lat: 40.7500, lng: -73.9800, confidence: 0.72 },
+                        { id: 'algo2', label: 'Algorithm 2', lat: 40.7600, lng: -73.9900, confidence: 0.79 }
+                    ],
+                    domain_labels: [
+                        { id: 'manager', label: 'Manager', lat: 40.7580, lng: -73.9840, confidence: 0.76 },
+                        { id: 'ethnicity', label: 'Ethnicity Expert', lat: 40.7620, lng: -73.9880, confidence: 0.83 },
+                        { id: 'geography', label: 'Geography Expert', lat: 40.7570, lng: -73.9820, confidence: 0.86 }
+                    ]
+                }
+            },
+            // Add placeholder images for testing - replace with your actual images
+            {
+                url: 'https://via.placeholder.com/500x400/4a90e2/ffffff?text=Indoor+Photo+3',
+                groundTruth: { lat: 51.5074, lng: -0.1278 }, // London, UK
+                description: 'Conference room',
+                aiPredictions: {
+                    no_labels: [
+                        { id: 'ai1', label: 'AI System 1', lat: 51.5000, lng: -0.1200, confidence: 0.70 },
+                        { id: 'ai2', label: 'AI System 2', lat: 51.5100, lng: -0.1300, confidence: 0.85 },
+                        { id: 'ai3', label: 'AI System 3', lat: 51.5050, lng: -0.1250, confidence: 0.73 }
+                    ],
+                    generic_labels: [
+                        { id: 'manager', label: 'Manager', lat: 51.5080, lng: -0.1280, confidence: 0.77 },
+                        { id: 'algo1', label: 'Algorithm 1', lat: 51.5000, lng: -0.1200, confidence: 0.70 },
+                        { id: 'algo2', label: 'Algorithm 2', lat: 51.5100, lng: -0.1300, confidence: 0.85 }
+                    ],
+                    domain_labels: [
+                        { id: 'manager', label: 'Manager', lat: 51.5080, lng: -0.1280, confidence: 0.77 },
+                        { id: 'ethnicity', label: 'Ethnicity Expert', lat: 51.5090, lng: -0.1290, confidence: 0.82 },
+                        { id: 'geography', label: 'Geography Expert', lat: 51.5070, lng: -0.1270, confidence: 0.89 }
+                    ]
+                }
+            },
+            {
+                url: 'https://via.placeholder.com/500x400/50c878/ffffff?text=Indoor+Photo+4',
+                groundTruth: { lat: 48.8566, lng: 2.3522 }, // Paris, France
+                description: 'Museum hall',
+                aiPredictions: {
+                    no_labels: [
+                        { id: 'ai1', label: 'AI System 1', lat: 48.8500, lng: 2.3400, confidence: 0.69 },
+                        { id: 'ai2', label: 'AI System 2', lat: 48.8600, lng: 2.3600, confidence: 0.81 },
+                        { id: 'ai3', label: 'AI System 3', lat: 48.8550, lng: 2.3500, confidence: 0.74 }
+                    ],
+                    generic_labels: [
+                        { id: 'manager', label: 'Manager', lat: 48.8570, lng: 2.3530, confidence: 0.75 },
+                        { id: 'algo1', label: 'Algorithm 1', lat: 48.8500, lng: 2.3400, confidence: 0.69 },
+                        { id: 'algo2', label: 'Algorithm 2', lat: 48.8600, lng: 2.3600, confidence: 0.81 }
+                    ],
+                    domain_labels: [
+                        { id: 'manager', label: 'Manager', lat: 48.8570, lng: 2.3530, confidence: 0.75 },
+                        { id: 'ethnicity', label: 'Ethnicity Expert', lat: 48.8580, lng: 2.3540, confidence: 0.84 },
+                        { id: 'geography', label: 'Geography Expert', lat: 48.8560, lng: 2.3520, confidence: 0.87 }
+                    ]
+                }
+            },
+            {
+                url: 'https://via.placeholder.com/500x400/ff6b6b/ffffff?text=Indoor+Photo+5',
+                groundTruth: { lat: 35.6762, lng: 139.6503 }, // Tokyo, Japan
+                description: 'Corporate office',
+                aiPredictions: {
+                    no_labels: [
+                        { id: 'ai1', label: 'AI System 1', lat: 35.6700, lng: 139.6400, confidence: 0.67 },
+                        { id: 'ai2', label: 'AI System 2', lat: 35.6800, lng: 139.6600, confidence: 0.78 },
+                        { id: 'ai3', label: 'AI System 3', lat: 35.6750, lng: 139.6480, confidence: 0.71 }
+                    ],
+                    generic_labels: [
+                        { id: 'manager', label: 'Manager', lat: 35.6770, lng: 2.3510, confidence: 0.73 },
+                        { id: 'algo1', label: 'Algorithm 1', lat: 35.6700, lng: 139.6400, confidence: 0.67 },
+                        { id: 'algo2', label: 'Algorithm 2', lat: 35.6800, lng: 139.6600, confidence: 0.78 }
+                    ],
+                    domain_labels: [
+                        { id: 'manager', label: 'Manager', lat: 35.6770, lng: 139.6510, confidence: 0.73 },
+                        { id: 'ethnicity', label: 'Ethnicity Expert', lat: 35.6780, lng: 139.6520, confidence: 0.86 },
+                        { id: 'geography', label: 'Geography Expert', lat: 35.6760, lng: 139.6500, confidence: 0.90 }
+                    ]
+                }
+            }
+        ];
+
+        // Study configuration
+        const STUDY_CONFIG = {
+            totalTrials: studyImages.length,
+            conditions: ['no_labels', 'generic_labels', 'domain_labels']
+        };
+
+        // Study state
+        let currentTrial = 0;
+        let condition = '';
+        let map = null;
+        let userMarker = null;
+        let aiMarkers = [];
+        let studyData = {
+            participantId: generateParticipantId(),
+            condition: '',
+            demographics: {},
+            trials: [],
+            questionnaire: {},
+            timestamps: {}
+        };
+
+        function generateParticipantId() {
+            return 'P' + Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+        }
+
+        function updateProgress() {
+            const progress = ((currentTrial) / STUDY_CONFIG.totalTrials) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('currentTrial').textContent = currentTrial;
+            document.getElementById('totalTrials').textContent = STUDY_CONFIG.totalTrials;
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function startStudy() {
+            const consentBoxes = document.querySelectorAll('#consentScreen input[type="checkbox"]');
+            const allChecked = Array.from(consentBoxes).every(box => box.checked);
+            
+            if (!allChecked) {
+                document.getElementById('consentError').style.display = 'block';
+                return;
+            }
+
+            // Randomly assign condition
+            condition = STUDY_CONFIG.conditions[Math.floor(Math.random() * STUDY_CONFIG.conditions.length)];
+            studyData.condition = condition;
+            studyData.timestamps.consentCompleted = new Date().toISOString();
+
+            showScreen('demographicsScreen');
+        }
+
+        function startTrials() {
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+            
+            if (!age || !gender) {
+                document.getElementById('demographicsError').style.display = 'block';
+                return;
+            }
+
+            studyData.demographics = { age: parseInt(age), gender };
+            studyData.timestamps.trialsStarted = new Date().toISOString();
+            
+            currentTrial = 1;
+            updateProgress();
+            showScreen('trialScreen');
+            initializeTrial();
+        }
+
+        function initializeTrial() {
+            // Reset trial state
+            document.getElementById('aiPredictions').style.display = 'none';
+            document.getElementById('revisionSection').style.display = 'none';
+            document.getElementById('initialGuessBtn').style.display = 'inline-block';
+            document.getElementById('initialGuessBtn').disabled = true;
+            document.getElementById('finalGuessBtn').style.display = 'none';
+            document.getElementById('initialConfidenceSlider').disabled = true;
+            document.getElementById('locationStatus').textContent = 'Select location first';
+            document.getElementById('locationStatus').className = 'status-indicator status-pending';
+            
+            // Reset confidence sliders
+            document.getElementById('initialConfidenceSlider').value = 50;
+            document.getElementById('finalConfidenceSlider').value = 50;
+            document.getElementById('initialConfidenceDisplay').textContent = '50%';
+            document.getElementById('finalConfidenceDisplay').textContent = '50%';
+            
+            // Clear previous markers
+            if (userMarker) {
+                map.removeLayer(userMarker);
+                userMarker = null;
+            }
+            aiMarkers.forEach(marker => map.removeLayer(marker));
+            aiMarkers = [];
+
+            // Set current image
+            const currentImageData = studyImages[currentTrial - 1];
+            document.getElementById('currentImage').src = currentImageData.url;
+
+            // Initialize map if needed
+            if (!map) {
+                initializeMap();
+            }
+
+            // Initialize trial data
+            studyData.trials[currentTrial - 1] = {
+                trialNumber: currentTrial,
+                imageUrl: currentImageData.url,
+                groundTruth: currentImageData.groundTruth,
+                imageDescription: currentImageData.description,
+                initialGuess: null,
+                initialConfidence: null,
+                finalGuess: null,
+                finalConfidence: null,
+                aiPredictions: [],
+                decisionChanged: false,
+                confidenceChanged: false,
+                timestamp: new Date().toISOString()
+            };
+        }
+
+        function initializeMap() {
+            map = L.map('mapContainer').setView([40.0, 0.0], 2);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            map.on('click', function(e) {
+                const lat = e.latlng.lat;
+                const lng = e.latlng.lng;
+                
+                if (userMarker) {
+                    map.removeLayer(userMarker);
+                }
+                
+                userMarker = L.marker([lat, lng], {
+                    icon: L.icon({
+                        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+                        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    })
+                }).addTo(map);
+                
+                userMarker.bindPopup('Your guess').openPopup();
+                
+                const currentTrialData = studyData.trials[currentTrial - 1];
+                if (!currentTrialData.initialGuess) {
+                    currentTrialData.initialGuess = { lat, lng };
+                    // Enable confidence slider and update status
+                    document.getElementById('initialConfidenceSlider').disabled = false;
+                    document.getElementById('locationStatus').textContent = 'Location selected ✓';
+                    document.getElementById('locationStatus').className = 'status-indicator status-complete';
+                    updateInitialGuessButton();
+                } else {
+                    currentTrialData.finalGuess = { lat, lng };
+                    currentTrialData.decisionChanged = true;
+                }
+            });
+        }
+
+        function updateInitialGuessButton() {
+            const currentTrialData = studyData.trials[currentTrial - 1];
+            const hasLocation = currentTrialData.initialGuess !== null;
+            const hasConfidence = currentTrialData.initialConfidence !== null;
+            document.getElementById('initialGuessBtn').disabled = !(hasLocation && hasConfidence);
+        }
+
+        function showAIPredictions() {
+            const currentTrialData = studyData.trials[currentTrial - 1];
+            const currentImageData = studyImages[currentTrial - 1];
+            
+            // Get AI predictions for current condition
+            const predictions = currentImageData.aiPredictions[condition];
+            currentTrialData.aiPredictions = predictions;
+            
+            // Display AI predictions
+            const aiTeammatesDiv = document.getElementById('aiTeammates');
+            aiTeammatesDiv.innerHTML = '';
+            
+            predictions.forEach((prediction, index) => {
+                const teammateDiv = document.createElement('div');
+                teammateDiv.className = 'ai-teammate';
+                
+                const confidenceColor = `hsl(${prediction.confidence * 120}, 70%, 50%)`;
+                
+                teammateDiv.innerHTML = `
+                    <div class="teammate-info">
+                        <div class="teammate-label">${prediction.label}</div>
+                        <div class="teammate-location">Lat: ${prediction.lat.toFixed(2)}, Lng: ${prediction.lng.toFixed(2)}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.8em; color: #7f8c8d; margin-bottom: 5px;">
+                            Confidence: ${Math.round(prediction.confidence * 100)}%
+                        </div>
+                        <div class="ai-confidence-bar">
+                            <div class="ai-confidence-fill" style="width: ${prediction.confidence * 100}%; background: ${confidenceColor};"></div>
+                        </div>
+                    </div>
+                `;
+                
+                aiTeammatesDiv.appendChild(teammateDiv);
+                
+                // Add AI marker to map
+                const aiMarker = L.marker([prediction.lat, prediction.lng], {
+                    icon: L.icon({
+                        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+                        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    })
+                }).addTo(map);
+                
+                aiMarker.bindPopup(`${prediction.label}<br>Confidence: ${Math.round(prediction.confidence * 100)}%`);
+                aiMarkers.push(aiMarker);
+            });
+
+            // Set final confidence to initial confidence
+            const initialConfidence = currentTrialData.initialConfidence;
+            document.getElementById('finalConfidenceSlider').value = initialConfidence;
+            document.getElementById('finalConfidenceDisplay').textContent = initialConfidence + '%';
+            currentTrialData.finalConfidence = initialConfidence;
+
+            document.getElementById('aiPredictions').style.display = 'block';
+            document.getElementById('revisionSection').style.display = 'block';
+            document.getElementById('initialGuessBtn').style.display = 'none';
+            document.getElementById('finalGuessBtn').style.display = 'inline-block';
+        }
+
+        function nextTrial() {
+            const currentTrialData = studyData.trials[currentTrial - 1];
+            
+            // Set final guess if not changed
+            if (!currentTrialData.finalGuess) {
+                currentTrialData.finalGuess = currentTrialData.initialGuess;
+                currentTrialData.decisionChanged = false;
+            }
+
+            currentTrial++;
+            
+            if (currentTrial <= STUDY_CONFIG.totalTrials) {
+                updateProgress();
+                initializeTrial();
+            } else {
+                // All trials complete
+                studyData.timestamps.trialsCompleted = new Date().toISOString();
+                showScreen('questionnaireScreen');
+            }
+        }
+
+        function completeStudy() {
+            const trust = document.querySelector('input[name="trust"]:checked');
+            const confidence = document.querySelector('input[name="confidence"]:checked');
+            const strategy = document.getElementById('strategy').value;
+            
+            if (!trust || !confidence || !strategy.trim()) {
+                document.getElementById('questionnaireError').style.display = 'block';
+                return;
+            }
+
+            studyData.questionnaire = {
+                trust: parseInt(trust.value),
+                confidence: parseInt(confidence.value),
+                strategy: strategy,
+                comments: document.getElementById('comments').value
+            };
+            
+            studyData.timestamps.studyCompleted = new Date().toISOString();
+
+            // Generate completion code
+            const completionCode = generateCompletionCode();
+            document.getElementById('completionCode').textContent = completionCode;
+
+            // Save data to Google Sheets
+            saveDataToGoogleSheets(studyData);
+            
+            console.log('Study Data:', studyData);
+            
+            showScreen('completionScreen');
+        }
+
+        function generateCompletionCode() {
+            return studyData.participantId + '_' + Date.now().toString(36).toUpperCase();
+        }
+
+        function saveDataToGoogleSheets(data) {
+            if (GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbxpqxjI0IwxQEq2QOzkaXd2iGp2-7G3GHqshLqYknB_aYv_xRaECIyegwNOay18L6W8iA/exec') {
+                console.log('Google Sheets integration not configured - data logged to console');
+                return;
+            }
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(() => {
+                console.log('Data sent to Google Sheets');
+            }).catch(error => {
+                console.error('Error saving to Google Sheets:', error);
+            });
+        }
+
+        // Initialize confidence sliders
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            // Get URL parameters for Prolific integration
+            const urlParams = new URLSearchParams(window.location.search);
+            const prolificPid = urlParams.get('PROLIFIC_PID');
+            const studyId = urlParams.get('STUDY_ID');
+            const sessionId = urlParams.get('SESSION_ID');
+            
+            if (prolificPid) {
+                studyData.prolificPid = prolificPid;
+                studyData.studyId = studyId;
+                studyData.sessionId = sessionId;
+            }
+
+            // Set up confidence slider event listeners
+            const initialSlider = document.getElementById('initialConfidenceSlider');
+            const finalSlider = document.getElementById('finalConfidenceSlider');
+            const initialDisplay = document.getElementById('initialConfidenceDisplay');
+            const finalDisplay = document.getElementById('finalConfidenceDisplay');
+
+            if (initialSlider) {
+                initialSlider.addEventListener('input', function() {
+                    const value = this.value;
+                    initialDisplay.textContent = value + '%';
+                    if (currentTrial > 0) {
+                        studyData.trials[currentTrial - 1].initialConfidence = parseInt(value);
+                        updateInitialGuessButton();
+                    }
+                });
+            }
+
+            if (finalSlider) {
+                finalSlider.addEventListener('input', function() {
+                    const value = this.value;
+                    finalDisplay.textContent = value + '%';
+                    if (currentTrial > 0) {
+                        const currentTrialData = studyData.trials[currentTrial - 1];
+                        currentTrialData.finalConfidence = parseInt(value);
+                        currentTrialData.confidenceChanged = (parseInt(value) !== currentTrialData.initialConfidence);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
