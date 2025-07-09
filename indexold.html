@@ -85,11 +85,6 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             margin: 20px 0;
-            cursor: crosshair !important;
-        }
-
-        .map-container * {
-            cursor: crosshair !important;
         }
 
         .confidence-section {
@@ -167,12 +162,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-left: 4px solid;
         }
-
-        .ai-teammate.ai-color-0 { border-left-color: #e74c3c; }
-        .ai-teammate.ai-color-1 { border-left-color: #f39c12; }
-        .ai-teammate.ai-color-2 { border-left-color: #9b59b6; }
 
         .teammate-info {
             flex: 1;
@@ -570,13 +560,6 @@
         // CONFIGURATION - UPDATE THESE VALUES FOR YOUR STUDY
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwxBP8lU6rcgBaZFt_t2zGmpnvIGF-kiSfcxqTvOy03Pxc1D8BlJjX_tsO9DJDdJlfW/exec';
         
-        // AI marker colors - these correspond to the CSS classes
-        const AI_COLORS = [
-            { hex: '#e74c3c', class: 'ai-color-0' },
-            { hex: '#f39c12', class: 'ai-color-1' },
-            { hex: '#9b59b6', class: 'ai-color-2' }
-        ];
-
         // Study images with ground truth locations and AI predictions
         const studyImages = [
             {
@@ -879,17 +862,9 @@
             const aiTeammatesDiv = document.getElementById('aiTeammates');
             aiTeammatesDiv.innerHTML = '';
             
-            // Collect all marker coordinates for auto-zoom
-            const allMarkerCoords = [];
-            if (userMarker) {
-                allMarkerCoords.push([userMarker.getLatLng().lat, userMarker.getLatLng().lng]);
-            }
-            
             predictions.forEach((prediction, index) => {
-                const colorInfo = AI_COLORS[index % AI_COLORS.length];
-                
                 const teammateDiv = document.createElement('div');
-                teammateDiv.className = `ai-teammate ${colorInfo.class}`;
+                teammateDiv.className = 'ai-teammate';
                 
                 const confidenceColor = `hsl(${prediction.confidence * 120}, 70%, 50%)`;
                 
@@ -910,38 +885,21 @@
                 
                 aiTeammatesDiv.appendChild(teammateDiv);
                 
-                // Create colored marker icon
-                const markerIcon = L.icon({
-                    iconUrl: `data:image/svg+xml;base64,${btoa(`
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 41" width="25" height="41">
-                            <path d="M12.5 0C5.6 0 0 5.6 0 12.5c0 12.5 12.5 28.5 12.5 28.5s12.5-16 12.5-28.5C25 5.6 19.4 0 12.5 0z" fill="${colorInfo.hex}" stroke="#fff" stroke-width="1"/>
-                            <circle cx="12.5" cy="12.5" r="7" fill="#fff"/>
-                        </svg>
-                    `)}`,
-                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                    iconSize: [25, 41],
-                    iconAnchor: [12, 41],
-                    popupAnchor: [1, -34],
-                    shadowSize: [41, 41]
-                });
-                
                 // Add AI marker to map
                 const aiMarker = L.marker([prediction.lat, prediction.lng], {
-                    icon: markerIcon
+                    icon: L.icon({
+                        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+                        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    })
                 }).addTo(map);
                 
                 aiMarker.bindPopup(`${prediction.label}<br>Confidence: ${Math.round(prediction.confidence * 100)}%`);
                 aiMarkers.push(aiMarker);
-                
-                // Add to coordinates for auto-zoom
-                allMarkerCoords.push([prediction.lat, prediction.lng]);
             });
-
-            // Auto-zoom to fit all markers
-            if (allMarkerCoords.length > 1) {
-                const group = new L.featureGroup(aiMarkers.concat(userMarker ? [userMarker] : []));
-                map.fitBounds(group.getBounds(), { padding: [20, 20] });
-            }
 
             // Set final confidence to initial confidence
             const initialConfidence = currentTrialData.initialConfidence;
