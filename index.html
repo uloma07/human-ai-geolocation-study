@@ -67,6 +67,166 @@
             display: block;
         }
 
+        /* Full page info screen styles */
+        .info-screen-full {
+            background: white;
+            min-height: 100vh;
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .info-screen-full h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            text-align: center;
+        }
+
+        .info-screen-full h3 {
+            color: #34495e;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+
+        .info-screen-full ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .info-screen-full li {
+            margin: 10px 0;
+        }
+
+        .highlight {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .info-table th, .info-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .info-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .info-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* Consent section styles */
+        .consent-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 2px solid #3498db;
+        }
+
+        .consent-section h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        .consent-intro {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            margin-bottom: 30px;
+        }
+
+        .consent-intro h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .consent-item {
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #2ecc71;
+        }
+
+        .consent-item input[type="checkbox"] {
+            margin-right: 15px;
+            margin-top: 5px;
+            transform: scale(1.2);
+        }
+
+        .consent-item label {
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 1em;
+            margin-top: 15px;
+            padding: 10px;
+            background: #fdf2f2;
+            border-radius: 5px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .button-group {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Rest of existing styles */
         .image-container {
             text-align: center;
             margin-bottom: 30px;
@@ -212,30 +372,6 @@
             border-left: 4px solid #ffc107;
         }
 
-        .btn {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            margin: 5px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .btn:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
         .btn-secondary {
             background: linear-gradient(135deg, #95a5a6, #7f8c8d);
         }
@@ -284,34 +420,12 @@
             resize: vertical;
         }
 
-        .consent-item {
-            margin: 15px 0;
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .consent-item input[type="checkbox"] {
-            margin-right: 10px;
-            margin-top: 3px;
-        }
-
         .instructions {
             background: #e8f4fd;
             border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
             border-left: 4px solid #3498db;
-        }
-
-        .error {
-            color: #e74c3c;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-
-        .button-group {
-            text-align: center;
-            margin: 20px 0;
         }
 
         .status-indicator {
@@ -374,64 +488,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        .info-sheet {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            max-height: 60vh;
-            overflow-y: auto;
-            line-height: 1.6;
-        }
-
-        .info-sheet h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .info-sheet h3 {
-            color: #34495e;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-
-        .info-sheet ul {
-            margin: 10px 0;
-            padding-left: 20px;
-        }
-
-        .info-sheet li {
-            margin: 8px 0;
-        }
-
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-        }
-
-        .info-table th, .info-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        .info-table th {
-            background: #f8f9fa;
-            font-weight: bold;
-        }
-
-        .highlight {
-            background: #e8f4fd;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
-            margin: 15px 0;
-        }
     </style>
 </head>
 <body>
@@ -444,10 +500,11 @@
             <p>Trial <span id="currentTrial">0</span> of <span id="totalTrials">10</span></p>
         </div>
 
-        <!-- Participant Information Screen -->
+        <!-- Participant Information and Consent Screen (Combined) -->
         <div class="screen active" id="infoScreen">
-            <h2>Participant Information Sheet</h2>
-            <div class="info-sheet">
+            <div class="info-screen-full">
+                <h2>Participant Information Sheet</h2>
+                
                 <h3>Study Title</h3>
                 <p><strong>Team Trust Calibration in Human-AI Ensembles with Specialized Models for Geolocation Tasks</strong></p>
                 
@@ -469,7 +526,7 @@
                 
                 <h3>What will happen if I take part?</h3>
                 <div class="highlight">
-                    <p><strong>Single online session lasting approximately 20-30 minutes</strong></p>
+                    <p><strong>Single online session lasting approximately 25-35 minutes</strong></p>
                 </div>
                 
                 <p><strong>What you will do:</strong></p>
@@ -490,12 +547,12 @@
                     <tr>
                         <td>1</td>
                         <td>Read information and provide consent</td>
-                        <td>2-3 mins</td>
+                        <td>3-4 mins</td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>Complete 10 location-guessing trials</td>
-                        <td>15-20 mins</td>
+                        <td>20-25 mins</td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -510,7 +567,7 @@
                 </div>
                 
                 <h3>What are the risks and benefits?</h3>
-                <p><strong>Minimal risks:</strong> Time commitment (20-30 minutes), possible task fatigue, potential uncertainty with conflicting AI predictions.</p>
+                <p><strong>Minimal risks:</strong> Time commitment (25-35 minutes), possible task fatigue, potential uncertainty with conflicting AI predictions.</p>
                 <p><strong>Benefits:</strong></p>
                 <ul>
                     <li><strong>Monetary compensation</strong> at £9/hour (pro-rata) through Prolific</li>
@@ -526,10 +583,46 @@
                 <h3>Contact Information</h3>
                 <p><strong>Researcher:</strong> Ogechi Onuoha (Ogechi.onuoha@glasgow.ac.uk)<br>
                 <strong>Supervisor:</strong> Prof. Frank E. Pollick (frank.pollick@glasgow.ac.uk)</p>
-            </div>
-            
-            <div class="button-group">
-                <button class="btn" onclick="proceedToConsent()">I Have Read This Information - Continue</button>
+
+                <!-- Consent Section - Now part of the same screen -->
+                <div class="consent-section">
+                    <h2>Participant Consent</h2>
+                    <div class="consent-intro">
+                        <h3>Consent to Participate</h3>
+                        <p>By checking the boxes below, you confirm that you have read and understood the participant information sheet and agree to take part in this study.</p>
+                    </div>
+                    
+                    <div class="consent-item">
+                        <input type="checkbox" id="consent1" required>
+                        <label for="consent1">I confirm that I have read and understood the Participant Information Sheet.</label>
+                    </div>
+                    
+                    <div class="consent-item">
+                        <input type="checkbox" id="consent2" required>
+                        <label for="consent2">I understand that my participation is voluntary and that I am free to withdraw at any time without giving any reason.</label>
+                    </div>
+                    
+                    <div class="consent-item">
+                        <input type="checkbox" id="consent3" required>
+                        <label for="consent3">I confirm that I agree to the way my data will be collected and processed and that data will be stored for up to 10 years.</label>
+                    </div>
+                    
+                    <div class="consent-item">
+                        <input type="checkbox" id="consent4" required>
+                        <label for="consent4">I understand that all data and information I provide will be kept confidential.</label>
+                    </div>
+                    
+                    <div class="consent-item">
+                        <input type="checkbox" id="consent5" required>
+                        <label for="consent5">I agree to take part in the study.</label>
+                    </div>
+                    
+                    <div class="error" id="consentError" style="display: none;">Please check all consent boxes to continue.</div>
+                    
+                    <div class="button-group">
+                        <button class="btn" onclick="startStudy()">Begin Study</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -539,46 +632,6 @@
                 <h2>Preparing Next Trial...</h2>
                 <div class="loading-spinner"></div>
                 <p>Please wait while we load the next image.</p>
-            </div>
-        </div>
-
-        <!-- Consent Screen -->
-        <div class="screen" id="consentScreen">
-            <h2>Participant Consent</h2>
-            <div class="instructions">
-                <h3>Consent to Participate</h3>
-                <p>By checking the boxes below, you confirm that you have read and understood the participant information sheet and agree to take part in this study.</p>
-            </div>
-            
-            <div class="consent-item">
-                <input type="checkbox" id="consent1" required>
-                <label for="consent1">I confirm that I have read and understood the Participant Information Sheet.</label>
-            </div>
-            
-            <div class="consent-item">
-                <input type="checkbox" id="consent2" required>
-                <label for="consent2">I understand that my participation is voluntary and that I am free to withdraw at any time without giving any reason.</label>
-            </div>
-            
-            <div class="consent-item">
-                <input type="checkbox" id="consent3" required>
-                <label for="consent3">I confirm that I agree to the way my data will be collected and processed and that data will be stored for up to 10 years.</label>
-            </div>
-            
-            <div class="consent-item">
-                <input type="checkbox" id="consent4" required>
-                <label for="consent4">I understand that all data and information I provide will be kept confidential.</label>
-            </div>
-            
-            <div class="consent-item">
-                <input type="checkbox" id="consent5" required>
-                <label for="consent5">I agree to take part in the study.</label>
-            </div>
-            
-            <div class="error" id="consentError" style="display: none;">Please check all consent boxes to continue.</div>
-            
-            <div class="button-group">
-                <button class="btn" onclick="startStudy()">Begin Study</button>
             </div>
         </div>
 
@@ -775,7 +828,7 @@
             { hex: '#9b59b6', class: 'ai-color-2' }
         ];
 
-        // Study images with ground truth locations and AI predictions
+        // Study images with ground truth locations and AI predictions (10 trials with more diverse locations)
         const studyImages = [
             {
                 url: 'images/photo1.jpg', // Replace with your image paths
@@ -821,7 +874,6 @@
                     ]
                 }
             },
-            // Add placeholder images for testing - replace with your actual images
             {
                 url: 'https://via.placeholder.com/500x400/4a90e2/ffffff?text=Indoor+Photo+3',
                 groundTruth: { lat: 51.5074, lng: -0.1278 }, // London, UK
@@ -887,6 +939,116 @@
                         { id: 'geography', label: 'Geography Expert', lat: 35.6740, lng: 139.6550, confidence: 0.90 }
                     ]
                 }
+            },
+            {
+                url: 'https://via.placeholder.com/500x400/8e44ad/ffffff?text=Indoor+Photo+6',
+                groundTruth: { lat: 52.5200, lng: 13.4050 }, // Berlin, Germany
+                description: 'Research lab',
+                aiPredictions: {
+                    no_labels: [
+                        { id: 'ai1', label: 'AI System 1', lat: 52.4100, lng: 13.2500, confidence: 0.47 },
+                        { id: 'ai2', label: 'AI System 2', lat: 52.5300, lng: 13.3900, confidence: 0.73 },
+                        { id: 'ai3', label: 'AI System 3', lat: 52.6200, lng: 13.5800, confidence: 0.58 }
+                    ],
+                    generic_labels: [
+                        { id: 'manager', label: 'Manager', lat: 52.5150, lng: 13.4200, confidence: 0.68 },
+                        { id: 'algo1', label: 'Algorithm 1', lat: 52.4800, lng: 13.3200, confidence: 0.52 },
+                        { id: 'algo2', label: 'Algorithm 2', lat: 52.5280, lng: 13.3980, confidence: 0.80 }
+                    ],
+                    domain_labels: [
+                        { id: 'manager', label: 'Manager', lat: 52.5220, lng: 13.4080, confidence: 0.71 },
+                        { id: 'ethnicity', label: 'Ethnicity Expert', lat: 52.5380, lng: 13.3750, confidence: 0.64 },
+                        { id: 'geography', label: 'Geography Expert', lat: 52.5180, lng: 13.4120, confidence: 0.85 }
+                    ]
+                }
+            },
+            {
+                url: 'https://via.placeholder.com/500x400/e67e22/ffffff?text=Indoor+Photo+7',
+                groundTruth: { lat: -33.8688, lng: 151.2093 }, // Sydney, Australia
+                description: 'University classroom',
+                aiPredictions: {
+                    no_labels: [
+                        { id: 'ai1', label: 'AI System 1', lat: -33.7200, lng: 151.0500, confidence: 0.44 },
+                        { id: 'ai2', label: 'AI System 2', lat: -33.8750, lng: 151.1950, confidence: 0.76 },
+                        { id: 'ai3', label: 'AI System 3', lat: -33.9800, lng: 151.3500, confidence: 0.61 }
+                    ],
+                    generic_labels: [
+                        { id: 'manager', label: 'Manager', lat: -33.8650, lng: 151.2200, confidence: 0.69 },
+                        { id: 'algo1', label: 'Algorithm 1', lat: -33.9200, lng: 151.1200, confidence: 0.48 },
+                        { id: 'algo2', label: 'Algorithm 2', lat: -33.8720, lng: 151.2050, confidence: 0.82 }
+                    ],
+                    domain_labels: [
+                        { id: 'manager', label: 'Manager', lat: -33.8700, lng: 151.2110, confidence: 0.73 },
+                        { id: 'ethnicity', label: 'Ethnicity Expert', lat: -33.8820, lng: 151.1850, confidence: 0.67 },
+                        { id: 'geography', label: 'Geography Expert', lat: -33.8670, lng: 151.2140, confidence: 0.88 }
+                    ]
+                }
+            },
+            {
+                url: 'https://via.placeholder.com/500x400/27ae60/ffffff?text=Indoor+Photo+8',
+                groundTruth: { lat: 45.4215, lng: -75.6972 }, // Ottawa, Canada
+                description: 'Government office',
+                aiPredictions: {
+                    no_labels: [
+                        { id: 'ai1', label: 'AI System 1', lat: 45.3200, lng: -75.8500, confidence: 0.40 },
+                        { id: 'ai2', label: 'AI System 2', lat: 45.4300, lng: -75.6800, confidence: 0.77 },
+                        { id: 'ai3', label: 'AI System 3', lat: 45.5200, lng: -75.5500, confidence: 0.55 }
+                    ],
+                    generic_labels: [
+                        { id: 'manager', label: 'Manager', lat: 45.4180, lng: -75.7100, confidence: 0.70 },
+                        { id: 'algo1', label: 'Algorithm 1', lat: 45.3800, lng: -75.7800, confidence: 0.45 },
+                        { id: 'algo2', label: 'Algorithm 2', lat: 45.4250, lng: -75.6900, confidence: 0.84 }
+                    ],
+                    domain_labels: [
+                        { id: 'manager', label: 'Manager', lat: 45.4200, lng: -75.6980, confidence: 0.75 },
+                        { id: 'ethnicity', label: 'Ethnicity Expert', lat: 45.4350, lng: -75.6750, confidence: 0.62 },
+                        { id: 'geography', label: 'Geography Expert', lat: 45.4190, lng: -75.7020, confidence: 0.89 }
+                    ]
+                }
+            },
+            {
+                url: 'https://via.placeholder.com/500x400/f39c12/ffffff?text=Indoor+Photo+9',
+                groundTruth: { lat: 55.6761, lng: 12.5683 }, // Copenhagen, Denmark
+                description: 'Design studio',
+                aiPredictions: {
+                    no_labels: [
+                        { id: 'ai1', label: 'AI System 1', lat: 55.5800, lng: 12.4200, confidence: 0.43 },
+                        { id: 'ai2', label: 'AI System 2', lat: 55.6850, lng: 12.5500, confidence: 0.78 },
+                        { id: 'ai3', label: 'AI System 3', lat: 55.7500, lng: 12.6800, confidence: 0.59 }
+                    ],
+                    generic_labels: [
+                        { id: 'manager', label: 'Manager', lat: 55.6720, lng: 12.5800, confidence: 0.71 },
+                        { id: 'algo1', label: 'Algorithm 1', lat: 55.6200, lng: 12.4800, confidence: 0.49 },
+                        { id: 'algo2', label: 'Algorithm 2', lat: 55.6780, lng: 12.5620, confidence: 0.83 }
+                    ],
+                    domain_labels: [
+                        { id: 'manager', label: 'Manager', lat: 55.6750, lng: 12.5700, confidence: 0.74 },
+                        { id: 'ethnicity', label: 'Ethnicity Expert', lat: 55.6900, lng: 12.5450, confidence: 0.65 },
+                        { id: 'geography', label: 'Geography Expert', lat: 55.6740, lng: 12.5720, confidence: 0.87 }
+                    ]
+                }
+            },
+            {
+                url: 'https://via.placeholder.com/500x400/9b59b6/ffffff?text=Indoor+Photo+10',
+                groundTruth: { lat: 19.0760, lng: 72.8777 }, // Mumbai, India
+                description: 'Tech startup office',
+                aiPredictions: {
+                    no_labels: [
+                        { id: 'ai1', label: 'AI System 1', lat: 18.9200, lng: 72.7200, confidence: 0.39 },
+                        { id: 'ai2', label: 'AI System 2', lat: 19.0850, lng: 72.8650, confidence: 0.75 },
+                        { id: 'ai3', label: 'AI System 3', lat: 19.2100, lng: 73.0200, confidence: 0.57 }
+                    ],
+                    generic_labels: [
+                        { id: 'manager', label: 'Manager', lat: 19.0720, lng: 72.8900, confidence: 0.68 },
+                        { id: 'algo1', label: 'Algorithm 1', lat: 19.0200, lng: 72.8000, confidence: 0.46 },
+                        { id: 'algo2', label: 'Algorithm 2', lat: 19.0800, lng: 72.8720, confidence: 0.81 }
+                    ],
+                    domain_labels: [
+                        { id: 'manager', label: 'Manager', lat: 19.0770, lng: 72.8790, confidence: 0.72 },
+                        { id: 'ethnicity', label: 'Ethnicity Expert', lat: 19.0950, lng: 72.8550, confidence: 0.63 },
+                        { id: 'geography', label: 'Geography Expert', lat: 19.0750, lng: 72.8820, confidence: 0.86 }
+                    ]
+                }
             }
         ];
 
@@ -930,20 +1092,15 @@
             
             // Show/hide study header based on screen
             const studyHeader = document.getElementById('studyHeader');
-            if (screenId === 'infoScreen' || screenId === 'consentScreen' || screenId === 'demographicsScreen') {
+            if (screenId === 'infoScreen' || screenId === 'demographicsScreen') {
                 studyHeader.style.display = 'none';
             } else {
                 studyHeader.style.display = 'block';
             }
         }
 
-        function proceedToConsent() {
-            studyData.timestamps.infoSheetRead = new Date().toISOString();
-            showScreen('consentScreen');
-        }
-
         function startStudy() {
-            const consentBoxes = document.querySelectorAll('#consentScreen input[type="checkbox"]');
+            const consentBoxes = document.querySelectorAll('#infoScreen input[type="checkbox"]');
             const allChecked = Array.from(consentBoxes).every(box => box.checked);
             
             if (!allChecked) {
@@ -1130,24 +1287,16 @@
                 
                 aiTeammatesDiv.appendChild(teammateDiv);
                 
-                // Create colored marker icon
-                const markerIcon = L.icon({
-                    iconUrl: `data:image/svg+xml;base64,${btoa(`
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 41" width="25" height="41">
-                            <path d="M12.5 0C5.6 0 0 5.6 0 12.5c0 12.5 12.5 28.5 12.5 28.5s12.5-16 12.5-28.5C25 5.6 19.4 0 12.5 0z" fill="${colorInfo.hex}" stroke="#fff" stroke-width="1"/>
-                            <circle cx="12.5" cy="12.5" r="7" fill="#fff"/>
-                        </svg>
-                    `)}`,
-                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                    iconSize: [25, 41],
-                    iconAnchor: [12, 41],
-                    popupAnchor: [1, -34],
-                    shadowSize: [41, 41]
-                });
-                
-                // Add AI marker to map
+                // Create AI marker
                 const aiMarker = L.marker([prediction.lat, prediction.lng], {
-                    icon: markerIcon
+                    icon: L.icon({
+                        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+                        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    })
                 }).addTo(map);
                 
                 aiMarker.bindPopup(`${prediction.label}<br>Confidence: ${Math.round(prediction.confidence * 100)}%`);
@@ -1232,7 +1381,7 @@
         }
 
         function saveDataToGoogleSheets(data) {
-            if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+            if (GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbwxBP8lU6rcgBaZFt_t2zGmpnvIGF-kiSfcxqTvOy03Pxc1D8BlJjX_tsO9DJDdJlfW/exec') {
                 console.log('Google Sheets integration not configured - data logged to console');
                 return;
             }
