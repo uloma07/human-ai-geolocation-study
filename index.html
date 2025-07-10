@@ -330,7 +330,7 @@
             border-left: 4px solid;
         }
 
-        .ai-teammate.ai-color-0 { border-left-color: #3cc5e7; }
+        .ai-teammate.ai-color-0 { border-left-color: #130cce; }
         .ai-teammate.ai-color-1 { border-left-color: #f39c12; }
         .ai-teammate.ai-color-2 { border-left-color: #9b59b6; }
 
@@ -816,12 +816,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script>
-        // CONFIGURATION - UPDATE THESE VALUES FOR YOUR STUDY
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwxBP8lU6rcgBaZFt_t2zGmpnvIGF-kiSfcxqTvOy03Pxc1D8BlJjX_tsO9DJDdJlfW/exec';
         
         // AI marker colors - these correspond to the CSS classes
         const AI_COLORS = [
-            { hex: '#e74c3c', class: 'ai-color-0' },
+            { hex: '#130cce', class: 'ai-color-0' },
             { hex: '#f39c12', class: 'ai-color-1' },
             { hex: '#9b59b6', class: 'ai-color-2' }
         ];
@@ -835,8 +834,8 @@
                 aiPredictions: {
                     no_labels: [
                         { id: 'ai1', label: 'AI System 1', lat: 35.9100, lng: -4.1800, confidence: 0.45 },
-                        { id: 'ai2', label: 'AI System 2', lat: 55.8650, lng: -42.2500, confidence: 0.87 },
-                        { id: 'ai3', label: 'AI System 3', lat: 55.7800, lng: -14.3200, confidence: 0.62 }
+                        { id: 'ai2', label: 'AI System 2', lat: 55.8650, lng: -72.2500, confidence: 0.87 },
+                        { id: 'ai3', label: 'AI System 3', lat: 55.7800, lng: -4.3200, confidence: 0.62 }
                     ],
                     generic_labels: [
                         { id: 'manager', label: 'Manager', lat: 55.8680, lng: -4.2450, confidence: 0.78 },
@@ -856,9 +855,9 @@
                 description: 'Office building',
                 aiPredictions: {
                     no_labels: [
-                        { id: 'ai1', label: 'AI System 1', lat: 30.6200, lng: -74.1500, confidence: 0.38 },
+                        { id: 'ai1', label: 'AI System 1', lat: 44.6200, lng: -80.1500, confidence: 0.38 },
                         { id: 'ai2', label: 'AI System 2', lat: 50.7620, lng: -23.9800, confidence: 0.84 },
-                        { id: 'ai3', label: 'AI System 3', lat: 40.8100, lng: -73.9200, confidence: 0.59 }
+                        { id: 'ai3', label: 'AI System 3', lat: 20.8100, lng: -73.9200, confidence: 0.59 }
                     ],
                     generic_labels: [
                         { id: 'manager', label: 'Manager', lat: 40.7550, lng: -73.9900, confidence: 0.76 },
@@ -901,7 +900,7 @@
                 aiPredictions: {
                     no_labels: [
                         { id: 'ai1', label: 'AI System 1', lat: 48.7200, lng: 12.1800, confidence: 0.42 },
-                        { id: 'ai2', label: 'AI System 2', lat: 38.8600, lng: 2.3400, confidence: 0.79 },
+                        { id: 'ai2', label: 'AI System 2', lat: 38.8600, lng: 7.3400, confidence: 0.79 },
                         { id: 'ai3', label: 'AI System 3', lat: 48.9200, lng: 2.4800, confidence: 0.56 }
                     ],
                     generic_labels: [
@@ -922,8 +921,8 @@
                 description: 'Corporate office',
                 aiPredictions: {
                     no_labels: [
-                        { id: 'ai1', label: 'AI System 1', lat: 25.5200, lng: 139.4800, confidence: 0.36 },
-                        { id: 'ai2', label: 'AI System 2', lat: 45.6800, lng: 139.6400, confidence: 0.81 },
+                        { id: 'ai1', label: 'AI System 1', lat: 15.5200, lng: 39.4800, confidence: 0.36 },
+                        { id: 'ai2', label: 'AI System 2', lat: 45.6800, lng: 129.6400, confidence: 0.81 },
                         { id: 'ai3', label: 'AI System 3', lat: 35.7500, lng: 139.7800, confidence: 0.63 }
                     ],
                     generic_labels: [
@@ -967,8 +966,8 @@
                 aiPredictions: {
                     no_labels: [
                         { id: 'ai1', label: 'AI System 1', lat: -31.7200, lng: 151.0500, confidence: 0.44 },
-                        { id: 'ai2', label: 'AI System 2', lat: -23.8750, lng: 151.1950, confidence: 0.76 },
-                        { id: 'ai3', label: 'AI System 3', lat: -43.9800, lng: 151.3500, confidence: 0.61 }
+                        { id: 'ai2', label: 'AI System 2', lat: -23.8750, lng: 141.1950, confidence: 0.76 },
+                        { id: 'ai3', label: 'AI System 3', lat: -33.9800, lng: 131.3500, confidence: 0.61 }
                     ],
                     generic_labels: [
                         { id: 'manager', label: 'Manager', lat: -33.8650, lng: 151.2200, confidence: 0.69 },
@@ -988,9 +987,9 @@
                 description: 'Government office',
                 aiPredictions: {
                     no_labels: [
-                        { id: 'ai1', label: 'AI System 1', lat: 45.3200, lng: -55.8500, confidence: 0.40 },
-                        { id: 'ai2', label: 'AI System 2', lat: 45.4300, lng: -35.6800, confidence: 0.77 },
-                        { id: 'ai3', label: 'AI System 3', lat: 45.5200, lng: -65.5500, confidence: 0.55 }
+                        { id: 'ai1', label: 'AI System 1', lat: 34.3200, lng: -55.8500, confidence: 0.40 },
+                        { id: 'ai2', label: 'AI System 2', lat: 45.4300, lng: -112.6800, confidence: 0.77 },
+                        { id: 'ai3', label: 'AI System 3', lat: 38.5200, lng: -65.5500, confidence: 0.55 }
                     ],
                     generic_labels: [
                         { id: 'manager', label: 'Manager', lat: 45.4180, lng: -75.7100, confidence: 0.70 },
@@ -1033,8 +1032,8 @@
                 aiPredictions: {
                     no_labels: [
                         { id: 'ai1', label: 'AI System 1', lat: 18.9200, lng: 72.7200, confidence: 0.39 },
-                        { id: 'ai2', label: 'AI System 2', lat: 12.0850, lng: 72.8650, confidence: 0.75 },
-                        { id: 'ai3', label: 'AI System 3', lat: 10.2100, lng: 73.0200, confidence: 0.57 }
+                        { id: 'ai2', label: 'AI System 2', lat: 19.0850, lng: 52.8650, confidence: 0.75 },
+                        { id: 'ai3', label: 'AI System 3', lat: 21.2100, lng: 82.0200, confidence: 0.57 }
                     ],
                     generic_labels: [
                         { id: 'manager', label: 'Manager', lat: 17.0720, lng: 72.8900, confidence: 0.68 },
