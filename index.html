@@ -1119,9 +1119,16 @@
             const age = document.getElementById('age').value;
             const gender = document.getElementById('gender').value;
             const country = document.getElementById('country').value;
-            
+
             if (!age || !gender || !country) {
                 document.getElementById('demographicsError').style.display = 'block';
+                document.getElementById('demographicsError').textContent = 'Please complete all fields.';
+                return;
+            }
+
+            if (parseInt(age) < 18) {
+                document.getElementById('demographicsError').style.display = 'block';
+                document.getElementById('demographicsError').textContent = 'You must be 18 years or older to participate in this study.';
                 return;
             }
 
@@ -1175,6 +1182,9 @@
             if (!map) {
                 initializeMap();
             }
+
+            // Reset map view to world view at start of each trial
+            map.setView([40.0, 0.0], 2);
 
             // Initialize trial data
             studyData.trials[currentTrial - 1] = {
