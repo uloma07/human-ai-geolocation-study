@@ -1709,6 +1709,7 @@
             const currentTrialData = studyData.trials[currentTrial - 1];
             const hasLocation = currentTrialData.initialGuess !== null;
             const hasConfidence = currentTrialData.initialConfidence !== null;
+            
             document.getElementById('initialGuessBtn').disabled = !(hasLocation && hasConfidence);
         }
 
@@ -1722,13 +1723,12 @@
             return; // prevent progression
             }
 
-            const explanation = document.getElementById('userExplanation').value.trim();
-            currentTrialData.explanation = explanation;
-
             document.getElementById('initialConfidenceSection').style.display = 'none';
             document.getElementById('mapContainer')?.scrollIntoView({ behavior: 'smooth' });
             const currentTrialData = studyData.trials[currentTrial - 1];
             const currentImageData = studyImages[currentTrial - 1];
+            const explanation = document.getElementById('userExplanation').value.trim();
+            currentTrialData.explanation = explanation;
             
             // Get AI predictions for current condition
             const predictions = currentImageData.aiPredictions[condition];
@@ -1937,7 +1937,6 @@
                     initialDisplay.textContent = value + '%';
                     if (currentTrial > 0) {
                         studyData.trials[currentTrial - 1].initialConfidence = parseInt(value);
-                        console.log(parseInt(value))
                         updateInitialGuessButton();
                     }
                 });
