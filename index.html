@@ -518,6 +518,16 @@
             margin: 20px auto;
         }
 
+        .medium-zoom-overlay {
+        z-index: 9999 !important;
+        }
+
+        .medium-zoom-image {
+        z-index: 10000 !important;
+        }
+
+
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -682,93 +692,25 @@
         <!-- Practice Trial Screen -->
         <div class="screen" id="practiceScreen">
             <div class="highlight">
-            💡 <strong>This is just practice!</strong> Take your time, experiment with the map controls, and get comfortable with the interface. Your practice data won't be saved.
+            💡 <strong>This is just practice!</strong> Take your time, experiment with the map controls, and get comfortable with the interface.
             </div>
-            <!-- <div class="practice-instructions">
-                
-
-                <div class="instruction-step" style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #3498db;">
-                    <span style="background: #3498db; color: white; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">1</span>
-                    <strong>Examine the Photo:</strong> Study the image shown below carefully for clues about its location. Look for architectural features, signs, furniture, lighting, or any other visual cues that might help you identify where this photo was taken.
-                </div>
-                
-                <div class="instruction-step" style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #3498db;">
-                    <span style="background: #3498db; color: white; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">2</span>
-                    <strong>Navigate the Map:</strong> Use the interactive map below the image to search for your suspected location.
-                    <ul style="margin: 10px 0 0 35px;">
-                        <li><strong>Pan:</strong> Click and drag the map to move around</li>
-                        <li><strong>Zoom:</strong> Use mouse wheel or +/- buttons to zoom in/out</li>
-                        <li><strong>Search:</strong> Navigate to areas you think match the photo</li>
-                    </ul>
-                </div>
-                
-                <div class="instruction-step" style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #3498db;">
-                    <span style="background: #3498db; color: white; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">3</span>
-                    <strong>Place Your Guess:</strong> Click anywhere on the map to place a red pin at your best guess location.
-                    <ul style="margin: 10px 0 0 35px;">
-                        <li>Your red pin shows your current guess</li>
-                        <li>Click elsewhere to move your pin to a new location</li>
-                        <li>Take your time to get the most accurate location possible</li>
-                    </ul>
-                </div>
-                
-                <div class="instruction-step" style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #3498db;">
-                    <span style="background: #3498db; color: white; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">4</span>
-                    <strong>Set Your Confidence:</strong> Once you've placed your pin, use the slider to rate how confident you are in your guess.
-                    <ul style="margin: 10px 0 0 35px;">
-                        <li>0 = Not confident at all</li>
-                        <li>100 = Extremely confident</li>
-                        <li>The slider will be enabled after you place your pin</li>
-                    </ul>
-                </div>
-                
-                <div class="instruction-step" style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #3498db;">
-                    <span style="background: #3498db; color: white; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">5</span>
-                    <strong>Confirm Your Initial Guess:</strong> Click "Confirm Initial Guess" to lock in your location and confidence rating. This will reveal the AI predictions.
-                </div>
-                
-                <div class="instruction-step" style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #3498db;">
-                    <span style="background: #3498db; color: white; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">6</span>
-                    <strong>Review AI Predictions:</strong> You'll see predictions from 3 AI teammates:
-                    <ul style="margin: 10px 0 0 35px;">
-                        <li>Each AI has placed a colored pin on the map</li>
-                        <li>Each shows their confidence level (higher bars = more confident)</li>
-                        <li>Colors match between the AI info panels and map pins</li>
-                    </ul>
-                </div>
-                
-                <div class="instruction-step" style="background: white; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #3498db;">
-                    <span style="background: #3498db; color: white; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">7</span>
-                    <strong>Final Decision:</strong> Now you can choose to:
-                    <ul style="margin: 10px 0 0 35px;">
-                        <li><strong>Keep your guess:</strong> Leave your red pin where it is</li>
-                        <li><strong>Change location:</strong> Click elsewhere on the map to move your pin</li>
-                        <li><strong>Update confidence:</strong> Adjust the final confidence slider</li>
-                        <li>Click "Begin Real Study" when ready</li>
-                    </ul>
-                </div>
-                
-                <div style="background: #fff3cd; padding: 10px; border-radius: 5px; text-align: center;">
-                    <strong>💡 Remember:</strong> This is just practice! Take time to explore the interface and ask questions if needed.
-                </div>
-            </div> -->
             
             <div class="image-container">
                 
                 <div class="instruction-step" style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #f39c12;">
-                    <span style="background: #fff3cd; color: red; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">1</span>
-                    <strong>Examine the Photo below:</strong> Study the image shown below carefully for clues about its location. Look for architectural features, signs, furniture, lighting, or any other visual cues that might help you identify where this photo was taken.
+                    <span style="background: #fff3cd; color: red; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: left; font-weight: bold; margin-right: 10px;">1</span>
+                    <strong>Examine the Photo below:</strong> Study the image shown below carefully for clues about its location. Look for architectural features, signs, furniture, lighting, or any other visual cues that might help you identify where this photo was taken. Click on the image to zoom in/out for a better view.
                 </div>
                 <img id="practiceImage" class="study-image" src="" alt="Practice location to guess">
+                 
             </div>
-            
-
+          
             <div class="instruction-step" style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #f39c12;">
                 <span style="background: #fff3cd; color: red; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">2</span>
                 <strong>Now, Navigate the Map below:</strong> Use the interactive map below to search for your suspected location. i.e where you think the photo was captured.
                 <ul style="margin: 10px 0 0 35px;">
                     <li><strong>Pan:</strong> Click and drag the map to move around</li>
-                    <li><strong>Zoom:</strong> Use mouse wheel or +/- buttons to zoom in/out</li>
+                    <li><strong>Zoom:</strong> Press CTRL + mouse wheel to zoom in/out</li>
                 </ul>
                 <br>
                 <span style="background: #fff3cd; color: red; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">3</span>
@@ -782,9 +724,9 @@
             <div class="map-container" id="practiceMapContainer"></div>
             
             <!-- Initial Confidence Section -->
-            <div class="instruction-step" style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #f39c12;">
+            <div class="instruction-step" id="practiceInitialConfidenceinstruct" style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #f39c12;">
                 <span style="background: #fff3cd; color: red; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">4</span>
-                <strong>Set Your Confidence:</strong> Once you've placed your pin, use the slider to rate how confident you are in your guess.<br>
+                <strong>Set Your Confidence:</strong> Once you've placed your pin, use the slider to rate how confident you are in your guess, then tell us why you have made this guess.<br>
                 NOTE: The slider will only be enabled after you place your pin at your guess the map
                 <ul style="margin: 10px 0 0 35px;">
                     <li>0 = Not confident at all</li>
@@ -806,7 +748,11 @@
                         <span>Extremely confident</span>
                     </div>
                 </div>
+                <br>
+                <h3>Why do you think the image is in the location you selected?</h3>
+                <textarea id="practiseUserExplanation" placeholder="Write your reasoning here. Please be as detailed as possible."></textarea>
             </div>
+
 
             <!-- AI Predictions Section -->
             <div class="instruction-step" id="aipredinstruction" style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #f39c12; display: none;">
@@ -867,9 +813,14 @@
                 <strong>Confirm Your Initial Guess:</strong> Now, Click "Confirm Initial Guess" to lock in your location guess and confidence rating. This will reveal the AI predictions. <br> NOTE: This button will only be enabled when you have made your initial guess and rated your confidence.
             </div>
 
+            <div class="consent-item" style="margin-top: 20px; display: none;" id="iamdone">
+                <input type="checkbox" id="practiceReadyCheckbox">
+                <label for="practiceReadyCheckbox">I understand how to use the interface and I'm ready to begin the study.</label>
+            </div>
+
             <div class="button-group">
                 <button class="btn btn-practice" id="practiceInitialGuessBtn" onclick="showPracticeAIPredictions()" disabled>Confirm Initial Guess</button>
-                <button class="btn btn-practice" id="practiceFinalGuessBtn" onclick="finishPracticeAndStartTrials()" style="display: none;">Begin Real Trials</button>
+                <button class="btn btn-practice" id="practiceFinalGuessBtn" onclick="finishPracticeAndStartTrials()" style="display: none;">Begin Study</button>
             </div>
         </div>
 
@@ -877,8 +828,8 @@
         <div class="screen" id="trialScreen">
             <div class="instructions">
                 <h2 style="margin-bottom: 15px; color: #2c3e50;">Location Guessing Task</h2>
-                <p><strong>Step 1: Examine the photo</strong> — Look for clues about the location.</p>
-                <p><strong>Step 2: Navigate the map</strong> — Pan, zoom, and search freely.</p>
+                <p><strong>Step 1: Examine the photo</strong> — Look for clues about the location. Click Image to zoom in/out.</p>
+                <p><strong>Step 2: Navigate the map</strong> — Pan (click and drag), Zoom (CTRL+mouse wheel), and search map freely.</p>
                 <p><strong>Step 3: Place your guess</strong> — Click to drop a red pin.</p>
                 <p><strong>Step 4: Set your confidence</strong> — Use the slider to rate it.</p>
                 <p><strong>Step 5: Confirm your guess</strong> — Click the button when ready.</p>
@@ -907,6 +858,10 @@
                         <span>Extremely confident</span>
                     </div>
                 </div>
+                <br>
+                <h3>Why do you think the image is in the location you selected?</h3>
+                <textarea id="userExplanation" placeholder="Write your reasoning here. Please be as detailed as possible." required></textarea>
+            
             </div>
 
             <!-- AI Predictions Section -->
@@ -1019,15 +974,22 @@
         <div class="screen" id="completionScreen">
             <h2>Study Complete!</h2>
             <div class="instructions">
-                <p>Thank you for participating in our study. Your responses have been recorded.</p>
-                <p><strong>Completion Code:</strong> <span id="completionCode" style="font-family: monospace; background: #f8f9fa; padding: 5px 10px; border-radius: 5px;"></span></p>
-                <p>Please copy this code and paste it into Prolific to receive your payment.</p>
+                <p>Thank you for participating in our study. Your responses have been recorded.</p><br>
+                <p>Please copy this code and paste it into Prolific to receive your payment.</p><br>
+                <p><strong>Completion Code:</strong> <br> <h3 id="completionCode" style="font-family: monospace; background: #f8f9fa; padding: 5px 10px; border-radius: 5px;"></h3></p>
+                <br>
+                
             </div>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://unpkg.com/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+
     <script>
+        document.getElementById('practiceReadyCheckbox').addEventListener('change', function(e) {
+        document.getElementById('practiceFinalGuessBtn').style.display = this.checked ? 'inline-block' : 'none';
+        });
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwxBP8lU6rcgBaZFt_t2zGmpnvIGF-kiSfcxqTvOy03Pxc1D8BlJjX_tsO9DJDdJlfW/exec';
         
         // AI marker colors - these correspond to the CSS classes
@@ -1044,12 +1006,20 @@
             description: 'University library - Practice',
             aiPredictions: {
                 no_labels: [
-                    { id: 'ai1', label: 'AI System 1', lat: 34.6200, lng: -118.1500, confidence: 0.38 },
-                    { id: 'ai2', label: 'AI System 2', lat: 41.7620, lng: -87.9800, confidence: 0.84 },
-                    { id: 'ai3', label: 'AI System 3', lat: 25.8100, lng: -81.9200, confidence: 0.59 }
+                    { id: 'ai1', label: 'AI System 1', lat: 48.8606, lng: 2.3376, confidence: 0.78 },  
+                    { id: 'ai2', label: 'AI System 2', lat: 35.6586, lng: 139.7454, confidence: 0.71 }, 
+                    { id: 'ai3', label: 'AI System 3', lat: 40.7484, lng: -73.9857, confidence: 0.89 }  
                 ]
             }
         };
+
+        mediumZoom('#currentImage', {
+        background: '#000'
+        });
+
+        mediumZoom('#practiceImage', {
+        background: '#000'
+        });
 
         // Study images with ground truth locations and AI predictions (10 trials with more diverse locations)
         const studyImages = [
@@ -1308,6 +1278,7 @@
             timestamps: {}
         };
 
+
         function generateParticipantId() {
             return 'P' + Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
         }
@@ -1433,12 +1404,23 @@
             }
             
             practiceMap = L.map('practiceMapContainer').setView([40.0, 0.0], 2);
+
+            practiceMap.scrollWheelZoom.disable();
+            practiceMap.getContainer().addEventListener('wheel', function (e) {
+            if (e.ctrlKey) {
+                practiceMap.scrollWheelZoom.enable();
+            } else {
+                practiceMap.scrollWheelZoom.disable();
+            }
+            });
+
             
             L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
                 attribution: '© OpenStreetMap contributors © CARTO',
                 subdomains: 'abcd',
                 maxZoom: 19
             }).addTo(practiceMap);
+
 
             practiceMap.on('click', function(e) {
                 const lat = e.latlng.lat;
@@ -1483,6 +1465,7 @@
         }
 
         function showPracticeAIPredictions() {
+            document.getElementById('practiceMapContainer')?.scrollIntoView({ behavior: 'smooth' });
             // Get AI predictions for practice (using no_labels condition)
             const predictions = practiceImageData.aiPredictions.no_labels;
             
@@ -1500,6 +1483,9 @@
 
             const practiceInitialGuessInstruction = document.getElementById('practiceInitialGuessInstruction')
             practiceInitialGuessInstruction.style.display = 'none'
+
+            document.getElementById('practiceInitialConfidenceinstruct').style.display = 'none'
+            document.getElementById('practiceInitialConfidenceSection').style.display = 'none'
             
             //display reevision instructions
             const confirmbtninstruction = document.getElementById('confirmbtninstruction')
@@ -1573,7 +1559,7 @@
             document.getElementById('practiceAiPredictions').style.display = 'block';
             document.getElementById('practiceRevisionSection').style.display = 'block';
             document.getElementById('practiceInitialGuessBtn').style.display = 'none';
-            document.getElementById('practiceFinalGuessBtn').style.display = 'inline-block';
+            document.getElementById('iamdone').style.display = 'inline-block';
         }
 
         function finishPracticeAndStartTrials() {
@@ -1611,6 +1597,8 @@
             document.getElementById('initialConfidenceSlider').disabled = true;
             document.getElementById('locationStatus').textContent = 'Select location first';
             document.getElementById('locationStatus').className = 'status-indicator status-pending';
+            document.getElementById('initialConfidenceSection').style.display = 'block';
+            document.getElementById('userExplanation').value = '';
             
             // Reset confidence sliders
             document.getElementById('initialConfidenceSlider').value = 50;
@@ -1648,8 +1636,10 @@
                 imageDescription: currentImageData.description,
                 initialGuess: null,
                 initialConfidence: null,
+                explanation:null,
                 finalGuess: null,
                 finalConfidence: null,
+                explanation: null,
                 aiPredictions: [],
                 decisionChanged: false,
                 confidenceChanged: false,
@@ -1663,6 +1653,15 @@
             }
             
             map = L.map('mapContainer').setView([40.0, 0.0], 2);
+
+            map.scrollWheelZoom.disable();
+            map.getContainer().addEventListener('wheel', function (e) {
+            if (e.ctrlKey) {
+                map.scrollWheelZoom.enable();
+            } else {
+                map.scrollWheelZoom.disable();
+            }
+            });
             
             L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
                 attribution: '© OpenStreetMap contributors © CARTO',
@@ -1714,13 +1713,27 @@
         }
 
         function showAIPredictions() {
+
+            // Capture user explanation
+            const explanationBox = document.getElementById('userExplanation');
+            if (!explanationBox.value.trim()) {
+            alert('Please provide an explanation before continuing.');
+            explanationBox.focus();
+            return; // prevent progression
+            }
+
+            const explanation = document.getElementById('userExplanation').value.trim();
+            currentTrialData.explanation = explanation;
+
+            document.getElementById('initialConfidenceSection').style.display = 'none';
+            document.getElementById('mapContainer')?.scrollIntoView({ behavior: 'smooth' });
             const currentTrialData = studyData.trials[currentTrial - 1];
             const currentImageData = studyImages[currentTrial - 1];
             
             // Get AI predictions for current condition
             const predictions = currentImageData.aiPredictions[condition];
             currentTrialData.aiPredictions = predictions;
-            
+
             // Display AI predictions
             const aiTeammatesDiv = document.getElementById('aiTeammates');
             aiTeammatesDiv.innerHTML = '';
@@ -1806,6 +1819,8 @@
             }
 
             currentTrial++;
+
+            document.getElementById('userExplanation').value = '';
             
             if (currentTrial <= STUDY_CONFIG.totalTrials) {
                 updateProgress();
@@ -1842,9 +1857,6 @@
 
             // Save data to Google Sheets (only real study data, not practice)
             saveDataToGoogleSheets(studyData);
-            
-            console.log('Study Data:', studyData);
-            console.log('Practice Data (not saved):', practiceData);
             
             showScreen('completionScreen');
         }
@@ -1925,6 +1937,7 @@
                     initialDisplay.textContent = value + '%';
                     if (currentTrial > 0) {
                         studyData.trials[currentTrial - 1].initialConfidence = parseInt(value);
+                        console.log(parseInt(value))
                         updateInitialGuessButton();
                     }
                 });
