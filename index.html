@@ -947,6 +947,34 @@
             </div>
         </div>
 
+        <!-- Debrief Screen -->
+        <div class="screen" id="debriefScreen">
+            <h2>Study Debrief</h2>
+            <p><strong>Thank You for Participating!</strong></p>
+            <p>Thank you for completing our study on human-AI collaboration in geolocation tasks. Your participation will help us better understand how people work with AI systems in decision-making scenarios.</p>
+            <p><br></p>
+            <h3>What Was This Study About?</h3>
+            <p>This study explored how people work alongside AI systems when making geolocation decisions. We were interested in how individuals form judgments, 
+                how they respond to suggestions from AI teammates, and what influences their level of trust in those suggestions. 
+                By observing how participants interact with different types of AI input, we aim to better understand how people make choices, revise them, 
+                and develop trust in Ai team mates during collaborative tasks.</p>
+            <p><br></p>
+            <h3>Your Data</h3>
+            <p>Your responses are completely anonymous and will be used only for research purposes. The data may be used to publish scientific findings about human-AI interaction and may inform the design of future AI collaboration tools.</p>
+            <p><br></p>
+            <h3>Questions or Concerns?</h3>
+            <p>If you have any questions about this study or would like to learn more about our research, please contact:</p>
+            <p><br></p>
+            <ul>
+                <li><strong>Researcher:</strong> Ogechi Onuoha (<a href="mailto:Ogechi.onuoha@glasgow.ac.uk">Ogechi.onuoha@glasgow.ac.uk</a>)</li>
+                <li><strong>Supervisor:</strong> Prof. Frank E. Pollick (<a href="mailto:frank.pollick@glasgow.ac.uk">frank.pollick@glasgow.ac.uk</a>)</li>
+            </ul>
+            <div class="button-group">
+                <button class="btn" onclick="finishStudy()">Finish Study</button>
+            </div>
+        </div>
+
+
         <!-- Completion Screen -->
         <div class="screen" id="completionScreen">
             <h2>Study Complete!</h2>
@@ -2150,14 +2178,18 @@
             
             studyData.timestamps.studyCompleted = new Date().toISOString();
 
+            // Save data to Google Sheets (only real study data, not practice)
+            saveDataToGoogleSheets(studyData);
+            
+            showScreen('debriefScreen'); //completionScreen
+        }
+
+        function finishStudy(){
             // Generate completion code
             const completionCode = 'CBBVNZSV'; //generateCompletionCode();
             document.getElementById('completionCode').textContent = completionCode;
 
-            // Save data to Google Sheets (only real study data, not practice)
-            saveDataToGoogleSheets(studyData);
-            
-            showScreen('completionScreen');
+            showScreen('completionScreen'); //
         }
 
         function generateCompletionCode() {
