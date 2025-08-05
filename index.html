@@ -721,6 +721,10 @@
                         <li>Take your time to get the most accurate location possible</li>
                     </ul>
             </div>
+
+            <div style="background: #fee; padding: 15px; border-radius: 8px; border-left: 4px solid #e74c3c; margin: 10px 0;">
+                <strong>⚠️ Important:</strong> Do NOT use any external sources (Google, reverse image search, etc.) to find the location. 
+            </div>
             <div class="map-container" id="practiceMapContainer"></div>
             
             <!-- Initial Confidence Section -->
@@ -818,6 +822,10 @@
                 <p><strong>Step 5: Confirm your guess</strong> — Click the button when ready.</p>
                 <p><strong>Step 6: See AI predictions</strong> — Compare your guess to AI teammates.</p>
                 <p><strong>Step 7: Final decision</strong> — Revise or keep your guess, then submit.</p>
+            </div>
+
+            <div style="background: #fee; padding: 15px; border-radius: 8px; border-left: 4px solid #e74c3c; margin: 10px 0;">
+                <strong>⚠️ Important:</strong> Do NOT use any external sources (Google, reverse image search, etc.) to find the location. 
             </div>
             
             <div class="image-container">
@@ -2126,7 +2134,8 @@
                 weight: 2,
                 fillOpacity: confidence, // Scales with AI confidence
                 //dashArray: '5, 5',
-                title: label
+                title: label,
+                interactive: false 
             }).addTo(map);
 
             if (label) {
